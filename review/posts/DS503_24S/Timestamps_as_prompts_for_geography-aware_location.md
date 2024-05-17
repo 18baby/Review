@@ -82,7 +82,7 @@ D: transformer Decoder
 	
 	- **sliding window**: 현재 grid를 중심으로 0.5의 스텝 크기로 window를 이동시켜 상, 하, 좌, 우 및 대각선 방향으로 총 8개의 인접 grid를 찾는다. 아래 그림은 윈도우의 이동을 나타낸다.
 
-		![](../../images/DS503_24S/Timestamps_as_prompts_for_geography-aware_location/Untitled-4.png)
+	![](../../images/DS503_24S/Timestamps_as_prompts_for_geography-aware_location/Untitled-4.png)
 
 	- **Self-Attention과 n-gram**: Quadkey는 4개의 문자로 이루어진 고유 키(0, 1, 2, 3)로 다양성이 낮아 직접적으로 Self-Attention을 적용하기 어렵다. 따라서, quadkey를 n-gram 방식으로 나누어 각 n-gram 사이의 상관관계를 Self-Attention을 통해 파악한다. 예를 들어, quadkey '0123'는 2-gram으로 '01', '12', '23'로 나뉜다. 앞서 shifted window를 이용해 찾은 8개의 주변 grid와 중심 grid를 모두 n-gram 방식으로 나누고 self-attention을 진행한다. Self-Attention을 통해 각 n-gram 사이의 종속성을 학습한 후, 이를 Feed Forward Network에 입력하여 더욱 정교한 임베딩 벡터를 생성한다.
 
